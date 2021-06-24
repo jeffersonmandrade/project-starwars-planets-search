@@ -1,10 +1,10 @@
-import React, { useContext_ } from 'react';
+import React, { useContext } from 'react';
 import contextPlanets from '../context/contextPlanets';
 
 function PlanetsTable() {
-  const { planets } = useContext(contextPlanets)
-  <table>
-    <thead>
+  const { data } = useContext(contextPlanets);
+  return (
+    <table>
       <tr>
         <th>Name</th>
         <th>Rotation Period</th>
@@ -20,11 +20,25 @@ function PlanetsTable() {
         <th>Edited</th>
         <th>Url</th>
       </tr>
-    </thead>
-    <tbod>
-      <tr>
-        {}
-      </tr>
-    </tbod>
-  </table>;
+      {data.map((planet) => (
+        <tr key={ planet.name }>
+          <td>{planet.name}</td>
+          <td>{planet.rotation_period}</td>
+          <td>{planet.orbital_period}</td>
+          <td>{planet.diameter}</td>
+          <td>{planet.climate}</td>
+          <td>{planet.gravity}</td>
+          <td>{planet.terrain}</td>
+          <td>{planet.surface_water}</td>
+          <td>{planet.population}</td>
+          <td>{planet.films}</td>
+          <td>{planet.created}</td>
+          <td>{planet.edited}</td>
+          <td>{planet.url}</td>
+        </tr>
+      ))}
+    </table>
+
+  );
 }
+export default PlanetsTable;
