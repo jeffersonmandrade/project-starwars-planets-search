@@ -6,15 +6,16 @@ import contextPlanets from './contextPlanets';
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
 
-  const getPlanets = async () => {
-    const planetsApi = await getApi();
-    setData(planetsApi);
+  const getPlanets = () => {
+    getApi().then((results) => setData(results));
   };
 
   useEffect(getPlanets, []);
+
   const context = {
     data,
   };
+
   return (
     <contextPlanets.Provider value={ context }>
       {children}
