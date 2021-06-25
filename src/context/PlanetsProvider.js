@@ -56,7 +56,7 @@ function PlanetsProvider({ children }) {
     searchPlanetsName,
     numericFilter,
     numericSearch,
-
+    filterNumeric,
   };
   return (
     <contextPlanets.Provider value={ context }>

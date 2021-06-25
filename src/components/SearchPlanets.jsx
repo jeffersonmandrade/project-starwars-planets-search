@@ -2,10 +2,16 @@ import React, { useContext } from 'react';
 import contextPlanets from '../context/contextPlanets';
 
 function SearchPlanets() {
-  const { searchPlanetsName, numericFilter, numericSearch } = useContext(contextPlanets);
-  const options = [' ', 'population', 'orbital_period',
+  const { searchPlanetsName, numericFilter,
+    numericSearch, filterNumeric } = useContext(contextPlanets);
+  let options = ['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water'];
+  const newOpitons = options.filter((elements) => elements !== (filterNumeric.column));
 
+  function handleClick() {
+    options = newOpitons;
+    numericSearch();
+  }
   return (
     <>
       <label htmlFor="idSearchBar">
@@ -24,7 +30,7 @@ function SearchPlanets() {
           name="column"
           onChange={ numericFilter }
         >
-          {options.map((element) => (
+          {newOpitons.map((element) => (
             <option
               key={ element }
             >
@@ -57,7 +63,7 @@ function SearchPlanets() {
           onChange={ numericFilter }
         />
       </label>
-      <button type="button" data-testid="button-filter" onClick={ numericSearch }>
+      <button type="button" data-testid="button-filter" onClick={ handleClick }>
         Adicionar Filtro
       </button>
     </>
