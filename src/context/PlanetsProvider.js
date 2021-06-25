@@ -43,7 +43,6 @@ function PlanetsProvider({ children }) {
         return element[column] > Number(value);
       }
       if (comparison === 'menor que') {
-        console.log(element[column]);
         return element[column] < Number(value);
       }
       return element[column] === value;
