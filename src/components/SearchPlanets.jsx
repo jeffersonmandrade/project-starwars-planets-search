@@ -3,7 +3,7 @@ import contextPlanets from '../context/contextPlanets';
 
 function SearchPlanets() {
   const { searchPlanetsName, numericFilter,
-    numericSearch, filterNumeric } = useContext(contextPlanets);
+    numericSearch, filterNumeric, resetState } = useContext(contextPlanets);
   let options = ['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water'];
   const newOpitons = options.filter((elements) => elements !== (filterNumeric.column));
@@ -66,6 +66,7 @@ function SearchPlanets() {
       <button type="button" data-testid="button-filter" onClick={ handleClick }>
         Adicionar Filtro
       </button>
+      <button type="button" data-testid="filter" onClick={ resetState }>x</button>
     </>
   );
 }

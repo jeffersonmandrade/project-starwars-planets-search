@@ -50,6 +50,11 @@ function PlanetsProvider({ children }) {
     setData(arrayFilter);
   };
 
+  const resetState = () => {
+    setFilter(INITIAL_FILTER);
+    setFilterNumeric(INITIAL_FILTER_NUMERIC);
+  };
+
   const context = {
     data,
     filters,
@@ -57,6 +62,7 @@ function PlanetsProvider({ children }) {
     numericFilter,
     numericSearch,
     filterNumeric,
+    resetState,
   };
   return (
     <contextPlanets.Provider value={ context }>
