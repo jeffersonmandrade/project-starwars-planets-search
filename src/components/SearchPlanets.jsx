@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import contextPlanets from '../context/contextPlanets';
 
 function SearchPlanets() {
-  const { searchPlanetsName } = useContext(contextPlanets);
-  const options = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  const { searchPlanetsName, numericFilter, numericSearch } = useContext(contextPlanets);
+  const options = [' ', 'population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water'];
 
   return (
     <>
@@ -16,11 +17,12 @@ function SearchPlanets() {
         />
       </label>
       <label htmlFor="idSelect">
+        Column:
         <select
           id="idSelect"
           data-testid="column-filter"
           name="column"
-          onChange=""
+          onChange={ numericFilter }
         >
           {options.map((element) => (
             <option
@@ -32,25 +34,30 @@ function SearchPlanets() {
         </select>
       </label>
       <label htmlFor="idComparison">
+        Comparison:
         <select
           data-testid="comparison-filter"
           id="idComparison"
           name="comparison"
+          onChange={ numericFilter }
         >
+          <option> </option>
           <option>maior que</option>
           <option>menor que</option>
           <option>igual a</option>
         </select>
       </label>
       <label htmlFor="idpinputNumber">
+        Value:
         <input
           type="number"
-          testid="value-filter"
+          data-testid="value-filter"
           id="idpinputNumber"
           name="value"
+          onChange={ numericFilter }
         />
       </label>
-      <button type="button" data-testid="button-filter">
+      <button type="button" data-testid="button-filter" onClick={ numericSearch }>
         Adicionar Filtro
       </button>
     </>

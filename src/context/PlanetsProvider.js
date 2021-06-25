@@ -30,11 +30,25 @@ function PlanetsProvider({ children }) {
       filterByName:
       { name: value } });
   };
-  const numericFilter = ({ tager: { name, value } }) => {
+  const numericFilter = ({ target: { name, value } }) => {
     setFilterNumeric({
       ...filterNumeric,
       [name]: value,
     });
+  };
+  const numericSearch = () => {
+    const arrayFilter = data.filter((element) => {
+      const { column, comparison, value } = filterNumeric;
+      if (comparison === 'maior que') {
+        return element[column] > Number(value);
+      }
+      if (comparison === 'menor que') {
+        console.log(element[column]);
+        return element[column] < Number(value);
+      }
+      return element[column] === value;
+    });
+    setData(arrayFilter);
   };
 
   const context = {
@@ -42,6 +56,8 @@ function PlanetsProvider({ children }) {
     filters,
     searchPlanetsName,
     numericFilter,
+    numericSearch,
+
   };
   return (
     <contextPlanets.Provider value={ context }>
