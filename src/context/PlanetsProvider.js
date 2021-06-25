@@ -5,7 +5,7 @@ import contextPlanets from './contextPlanets';
 
 const INITIAL_FILTER_NAME = {
   filterByName: {
-    name: 'Tatoo',
+    name: '',
   },
 };
 function PlanetsProvider({ children }) {
@@ -18,11 +18,10 @@ function PlanetsProvider({ children }) {
 
   useEffect(getPlanets, []);
 
-  const searchPlanetsName = (event) => {
-    console.log(event.target.value);
+  const searchPlanetsName = ({ target: { value } }) => {
     setFilter({ ...filters,
       filterByName:
-      { name: event.target.value } });
+      { name: value } });
   };
 
   const context = {
