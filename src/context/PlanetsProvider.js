@@ -7,7 +7,6 @@ const INITIAL_FILTER = {
   filterByName: {
     name: '',
   },
-  filterByNumericValues: [],
 };
 
 const INITIAL_FILTER_NUMERIC = {
@@ -30,7 +29,16 @@ function PlanetsProvider({ children }) {
       filterByName:
       { name: value } });
   };
+  const resetState = () => {
+    getPlanets();
+    setFilterNumeric(INITIAL_FILTER_NUMERIC);
+    setFilter(INITIAL_FILTER);
+  };
+
   const numericFilter = ({ target: { name, value } }) => {
+    if (value === 'X') {
+      return resetState();
+    }
     setFilterNumeric({
       ...filterNumeric,
       [name]: value,
@@ -48,11 +56,6 @@ function PlanetsProvider({ children }) {
       return element[column] === value;
     });
     setData(arrayFilter);
-  };
-
-  const resetState = () => {
-    setFilter(INITIAL_FILTER);
-    setFilterNumeric(INITIAL_FILTER_NUMERIC);
   };
 
   const context = {

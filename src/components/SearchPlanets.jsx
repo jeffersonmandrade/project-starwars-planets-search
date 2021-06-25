@@ -37,6 +37,7 @@ function SearchPlanets() {
               {element}
 
             </option>))}
+          <option data-testid="filter" onClick={ resetState }>X</option>
         </select>
       </label>
       <label htmlFor="idComparison">
@@ -51,6 +52,7 @@ function SearchPlanets() {
           <option>maior que</option>
           <option>menor que</option>
           <option>igual a</option>
+          <option data-testid="filter" onClick={ resetState }>X</option>
         </select>
       </label>
       <label htmlFor="idpinputNumber">
@@ -66,7 +68,6 @@ function SearchPlanets() {
       <button type="button" data-testid="button-filter" onClick={ handleClick }>
         Adicionar Filtro
       </button>
-      <button type="button" data-testid="filter" onClick={ resetState }>x</button>
     </>
   );
 }
