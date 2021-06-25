@@ -19,6 +19,8 @@ function SearchPlanets() {
         <select
           id="idSelect"
           data-testid="column-filter"
+          name="column"
+          onChange=""
         >
           {options.map((element) => (
             <option
@@ -29,6 +31,28 @@ function SearchPlanets() {
             </option>))}
         </select>
       </label>
+      <label htmlFor="idComparison">
+        <select
+          data-testid="comparison-filter"
+          id="idComparison"
+          name="comparison"
+        >
+          <option>maior que</option>
+          <option>menor que</option>
+          <option>igual a</option>
+        </select>
+      </label>
+      <label htmlFor="idpinputNumber">
+        <input
+          type="number"
+          testid="value-filter"
+          id="idpinputNumber"
+          name="value"
+        />
+      </label>
+      <button type="button" data-testid="button-filter">
+        Adicionar Filtro
+      </button>
     </>
   );
 }

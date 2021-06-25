@@ -7,6 +7,7 @@ const INITIAL_FILTER_NAME = {
   filterByName: {
     name: '',
   },
+  filterByNumericValues: [],
 };
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
@@ -22,6 +23,9 @@ function PlanetsProvider({ children }) {
     setFilter({ ...filters,
       filterByName:
       { name: value } });
+  };
+  const dropdownFilter = ({ tager: { value } }) => {
+
   };
 
   const context = {
