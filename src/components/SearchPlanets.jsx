@@ -1,24 +1,12 @@
-import React, { useContext, useState } from 'react';
-
-const INITIAL_STATE = {
-  filters: {
-    filterByName: {
-      name: 'Tatoo',
-    },
-  },
-};
+import React, { useContext } from 'react';
+import contextPlanets from '../context/contextPlanets';
 
 function SearchPlanets() {
-  const [filterName, setFilterByName] = useState(INITIAL_STATE);
-  const handleChache = ({ target: { value } }) => {
-    setFilterByName({ ...filters,
-      filteByName:
-       { name: value } });
-  };
-
+  const { searchPlanetsName } = useContext(contextPlanets);
+  console.log(searchPlanetsName);
   return (
     <label htmlFor="idSearchBar">
-      <input id="idSearchBar" type="text" onChance={ () => handleChache() } />
+      <input id="idSearchBar" type="text" onChange={ searchPlanetsName } />
     </label>
   );
 }

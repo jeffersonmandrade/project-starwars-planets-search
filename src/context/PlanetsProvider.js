@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import getApi from '../API/index';
 import contextPlanets from './contextPlanets';
 
+const INITIAL_FILTER_NAME = {
+  filterByName: {
+    name: 'Tatoo',
+  },
+};
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
+  const [filters, setFilter] = useState(INITIAL_FILTER_NAME);
 
   const getPlanets = () => {
     getApi().then((results) => setData(results));
@@ -12,10 +18,18 @@ function PlanetsProvider({ children }) {
 
   useEffect(getPlanets, []);
 
-  const context = {
-    data,
+  const searchPlanetsName = (event) => {
+    console.log(event.target.value);
+    setFilter({ ...filters,
+      filterByName:
+      { name: event.target.value } });
   };
 
+  const context = {
+    data,
+    filters,
+    searchPlanetsName,
+  };
   return (
     <contextPlanets.Provider value={ context }>
       {children}
