@@ -14,10 +14,15 @@ const INITIAL_FILTER_NUMERIC = {
   comparison: '',
   value: '',
 };
+
+const INITIAL_OPTIONS = ['population', 'orbital_period',
+  'diameter', 'rotation_period', 'surface_water'];
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
   const [filters, setFilter] = useState(INITIAL_FILTER);
   const [filterNumeric, setFilterNumeric] = useState(INITIAL_FILTER_NUMERIC);
+  const [options, setOption] = useState(INITIAL_OPTIONS);
+  const [noOptions, setNoOptions] = useState([]);
   const getPlanets = () => {
     getApi().then((results) => setData(results));
   };
@@ -66,6 +71,10 @@ function PlanetsProvider({ children }) {
     numericSearch,
     filterNumeric,
     resetState,
+    options,
+    setOption,
+    noOptions,
+    setNoOptions,
   };
   return (
     <contextPlanets.Provider value={ context }>

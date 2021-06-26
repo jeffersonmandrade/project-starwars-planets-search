@@ -3,15 +3,23 @@ import contextPlanets from '../context/contextPlanets';
 
 function SearchPlanets() {
   const { searchPlanetsName, numericFilter,
-    numericSearch, filterNumeric, resetState } = useContext(contextPlanets);
-  let options = ['population', 'orbital_period',
-    'diameter', 'rotation_period', 'surface_water'];
-  const newOpitons = options.filter((elements) => elements !== (filterNumeric.column));
+    numericSearch, filterNumeric, options = [], setOption, noOptions,
+    setNoOptions } = useContext(contextPlanets);
 
   function handleClick() {
-    options = newOpitons;
+    const newOptions = options.filter((element) => element !== filterNumeric.column);
+    setNoOptions([...noOptions, filterNumeric.column]);
+    setOption(newOptions);
+    console.log(filterNumeric);
     numericSearch();
   }
+  function changeNoOptions({ target: { value } }) {
+    console.log(value);
+    const newNoOptions = noOptions.filter((element) => element !== value);
+    setNoOptions(newNoOptions);
+    setOption([...options, value]);
+  }
+
   return (
     <>
       <label htmlFor="idSearchBar">
@@ -30,14 +38,12 @@ function SearchPlanets() {
           name="column"
           onChange={ numericFilter }
         >
-          {newOpitons.map((element) => (
+          {options.map((element) => (
             <option
               key={ element }
             >
               {element}
-
             </option>))}
-          <option data-testid="filter" onClick={ resetState }>X</option>
         </select>
       </label>
       <label htmlFor="idComparison">
@@ -52,7 +58,6 @@ function SearchPlanets() {
           <option>maior que</option>
           <option>menor que</option>
           <option>igual a</option>
-          <option data-testid="filter" onClick={ resetState }>X</option>
         </select>
       </label>
       <label htmlFor="idpinputNumber">
@@ -68,6 +73,16 @@ function SearchPlanets() {
       <button type="button" data-testid="button-filter" onClick={ handleClick }>
         Adicionar Filtro
       </button>
+      <div data-testid="filter" />
+      {noOptions.map((e) => (<button
+        key={ e }
+        type="button"
+        value={ e }
+        onClick={ changeNoOptions }
+      >
+        X
+
+      </button>))}
     </>
   );
 }
